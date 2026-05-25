@@ -1,0 +1,48 @@
+### V3 调度器 SFT 训练配置
+
+model_name_or_path: Qwen/Qwen2.5-7B-Instruct
+template: qwen
+
+stage: sft
+do_train: true
+
+dataset: sft_scheduler_v3_train
+eval_dataset: sft_scheduler_v3_val
+cutoff_len: 1024
+max_samples: null
+overwrite_cache: true
+preprocessing_num_workers: 16
+
+output_dir: ./outputs/sft-v3
+logging_steps: 10
+plot_loss: true
+overwrite_output_dir: true
+
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 2
+learning_rate: 1.0e-4
+num_train_epochs: 2.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+ddp_timeout: 180000000
+
+finetuning_type: lora
+lora_target: all
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0.0
+use_rslora: false
+
+optim: adamw_torch
+weight_decay: 0.0001
+max_grad_norm: 1.0
+
+per_device_eval_batch_size: 2
+eval_strategy: steps
+eval_steps: 100
+save_strategy: steps
+save_steps: 100
+load_best_model_at_end: true
+
+report_to: tensorboard

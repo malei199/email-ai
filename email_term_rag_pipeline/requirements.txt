@@ -1,0 +1,7 @@
+# RAG知识库依赖
+chromadb>=0.4.0
+sentence-transformers>=2.2.0
+pdfplumber>=0.10.0
+numpy>=1.24.0
+tqdm>=4.65.0
+scikit-learn>=1.3.0

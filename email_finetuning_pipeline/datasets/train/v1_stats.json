@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-04-28T18:29:08.399160",
+  "seed": 42,
+  "train": {
+    "total": 500,
+    "quality_passed": 499,
+    "layer_distribution": {
+      "rich": 250,
+      "medium": 175,
+      "poor": 75
+    },
+    "avg_events": 15.008
+  },
+  "val": {
+    "total": 50,
+    "quality_passed": 50,
+    "layer_distribution": {
+      "poor": 50
+    },
+    "avg_events": 2.46
+  },
+  "test": {
+    "total": 50,
+    "quality_passed": 50,
+    "layer_distribution": {
+      "poor": 50
+    },
+    "avg_events": 2.62
+  }
+}

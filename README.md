@@ -119,13 +119,7 @@
 │       ├── test_end_to_end.py
 │       └── test_cases.json
 │
-├── data/                          # 数据目录
-│   ├── eml_files/                       # 原始邮件 (*.eml) — 7,359 封
-│   ├── data-summary/                    # 邮件摘要（用于客户数据提取）
-│   ├── processed/                       # 格式转换后的训练数据
-│   ├── processed_data/                  # 中间处理数据
-│   └── pdf/
-│       └── 汉英英汉服装分类词汇.pdf       # 服装术语词典（491页）
+├── data/                          # 数据目录以及数据飞轮
 │
 ├── DATA_ORGANIZATION.md           # 数据文件组织说明
 ├── EMAIL_RAG_STRATEGY.md          # 邮件 RAG 策略设计文档

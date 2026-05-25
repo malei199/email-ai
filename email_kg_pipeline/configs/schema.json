@@ -1,0 +1,446 @@
+{
+  "description": "服装行业邮件知识图谱 Schema 定义",
+  "version": "1.0.0",
+  "nodes": {
+    "Style": {
+      "label": "Style",
+      "description": "服装款号/款式",
+      "properties": {
+        "style_id": {
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "description": "款号唯一标识，如 CCSS230021"
+        },
+        "last_update": {
+          "type": "string",
+          "required": false,
+          "description": "最后事件更新日期，格式 YYYY-MM-DD"
+        },
+        "event_count": {
+          "type": "integer",
+          "required": false,
+          "description": "关联事件总数"
+        },
+        "total_delay_days": {
+          "type": "integer",
+          "required": false,
+          "description": "累计延期天数"
+        },
+        "delay_event_count": {
+          "type": "integer",
+          "required": false,
+          "description": "含延期的事件数"
+        },
+        "first_event_date": {
+          "type": "string",
+          "required": false,
+          "description": "最早事件日期"
+        },
+        "latest_category": {
+          "type": "string",
+          "required": false,
+          "description": "最新事件所属阶段"
+        },
+        "status": {
+          "type": "string",
+          "required": false,
+          "description": "款号状态推断，如 进行中/已完成"
+        },
+        "order_ids": {
+          "type": "array",
+          "items": {"type": "string"},
+          "required": false,
+          "description": "关联的所有订单号列表（从邮件事件聚合）"
+        }
+      }
+    },
+    "Event": {
+      "label": "Event",
+      "description": "邮件中提取的业务事件",
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "description": "事件唯一标识，如 evt_0001"
+        },
+        "category": {
+          "type": "string",
+          "required": true,
+          "description": "业务阶段，如 Lab Dip/样衣/出货"
+        },
+        "event_type": {
+          "type": "string",
+          "required": true,
+          "description": "事件类型，如 提交/确认/延期申请"
+        },
+        "date": {
+          "type": "string",
+          "required": true,
+          "description": "事件日期，格式 YYYY-MM-DD"
+        },
+        "related_date": {
+          "type": "string",
+          "required": false,
+          "description": "计划/对比日期"
+        },
+        "delay_days": {
+          "type": "integer",
+          "required": false,
+          "description": "延期天数，提前为负数"
+        },
+        "description": {
+          "type": "string",
+          "required": true,
+          "description": "事件描述文本"
+        },
+        "confidence": {
+          "type": "float",
+          "required": true,
+          "description": "提取置信度 0.0~1.0"
+        },
+        "source_filename": {
+          "type": "string",
+          "required": true,
+          "description": "来源邮件文件名"
+        },
+        "source_subject": {
+          "type": "string",
+          "required": false,
+          "description": "来源邮件主题"
+        }
+      }
+    },
+    "Person": {
+      "label": "Person",
+      "description": "参与业务的人员",
+      "properties": {
+        "person_id": {
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "description": "人员唯一标识"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "人员姓名"
+        },
+        "email": {
+          "type": "string",
+          "required": false,
+          "description": "邮箱地址"
+        },
+        "department": {
+          "type": "string",
+          "required": false,
+          "description": "所属部门"
+        },
+        "role": {
+          "type": "string",
+          "required": false,
+          "description": "角色，如 跟单员/经理"
+        },
+        "is_from_email": {
+          "type": "boolean",
+          "required": true,
+          "description": "是否从邮件中提取（true）或从组织架构导入（false）"
+        },
+        "event_count": {
+          "type": "integer",
+          "required": false,
+          "description": "参与事件总数"
+        },
+        "style_count": {
+          "type": "integer",
+          "required": false,
+          "description": "参与款号总数"
+        }
+      }
+    },
+    "Factory": {
+      "label": "Factory",
+      "description": "生产工厂（从用户提供数据导入）",
+      "properties": {
+        "factory_id": {
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "description": "工厂唯一标识"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "工厂名称"
+        },
+        "code": {
+          "type": "string",
+          "required": false,
+          "description": "工厂代码"
+        },
+        "location": {
+          "type": "string",
+          "required": false,
+          "description": "工厂地址"
+        },
+        "contact_person": {
+          "type": "string",
+          "required": false,
+          "description": "联系人"
+        },
+        "status": {
+          "type": "string",
+          "required": false,
+          "description": "合作状态"
+        },
+        "style_count": {
+          "type": "integer",
+          "required": false,
+          "description": "关联款号数"
+        },
+        "total_delay_days": {
+          "type": "integer",
+          "required": false,
+          "description": "累计延期天数"
+        },
+        "delay_event_count": {
+          "type": "integer",
+          "required": false,
+          "description": "含延期的关联事件数"
+        }
+      }
+    },
+    "Category": {
+      "label": "Category",
+      "description": "业务阶段分类",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "description": "阶段名称，如 样衣/出货"
+        },
+        "event_count": {
+          "type": "integer",
+          "required": false,
+          "description": "该阶段事件总数"
+        },
+        "delay_event_count": {
+          "type": "integer",
+          "required": false,
+          "description": "该阶段含延期的事件数"
+        },
+        "avg_delay_days": {
+          "type": "float",
+          "required": false,
+          "description": "该阶段平均延期天数"
+        }
+      }
+    },
+    "Department": {
+      "label": "Department",
+      "description": "组织架构中的部门（从用户提供数据导入）",
+      "properties": {
+        "dept_id": {
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "description": "部门唯一标识"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "部门名称"
+        },
+        "manager_id": {
+          "type": "string",
+          "required": false,
+          "description": "部门负责人 person_id"
+        },
+        "member_count": {
+          "type": "integer",
+          "required": false,
+          "description": "部门人数"
+        }
+      }
+    },
+    "Email": {
+      "label": "Email",
+      "description": "来源邮件",
+      "properties": {
+        "filename": {
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "description": "邮件文件名"
+        },
+        "subject": {
+          "type": "string",
+          "required": false,
+          "description": "邮件主题"
+        },
+        "event_count": {
+          "type": "integer",
+          "required": false,
+          "description": "该邮件提取的事件数"
+        }
+      }
+    },
+    "Customer": {
+      "label": "Customer",
+      "description": "客户（从邮件摘要提取）",
+      "properties": {
+        "email": {
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "description": "客户邮箱"
+        },
+        "name": {
+          "type": "string",
+          "required": false,
+          "description": "客户名称"
+        },
+        "source": {
+          "type": "string",
+          "required": false,
+          "description": "来源字段（如 Indochine UK）"
+        },
+        "style_count": {
+          "type": "integer",
+          "required": false,
+          "description": "关联款号数量"
+        },
+        "style_list": {
+          "type": "array",
+          "items": {"type": "string"},
+          "required": false,
+          "description": "关联款号列表"
+        }
+      }
+    }
+  },
+  "relationships": {
+    "BELONGS_TO": {
+      "from": "Event",
+      "to": "Style",
+      "description": "事件属于某款号"
+    },
+    "HAS_CATEGORY": {
+      "from": "Event",
+      "to": "Category",
+      "description": "事件属于某业务阶段"
+    },
+    "PARTICIPATED_IN": {
+      "from": "Person",
+      "to": "Event",
+      "properties": {
+        "role": {
+          "type": "string",
+          "required": false,
+          "description": "参与角色：from/to"
+        }
+      },
+      "description": "人员参与某事件"
+    },
+    "INVOLVED_IN": {
+      "from": "Person",
+      "to": "Style",
+      "properties": {
+        "involvement_type": {
+          "type": "string",
+          "required": false,
+          "description": "参与类型：primary_owner/secondary_owner/participant/watcher"
+        },
+        "event_count": {
+          "type": "integer",
+          "required": false,
+          "description": "该人员在此款号上的事件数"
+        }
+      },
+      "description": "人员参与某款号（从邮件事件推断或从组织架构导入）"
+    },
+    "RESPONSIBLE_FOR": {
+      "from": "Person",
+      "to": "Style",
+      "description": "人员是某款号的负责人（从组织架构导入）"
+    },
+    "COLLABORATED_WITH": {
+      "from": "Person",
+      "to": "Person",
+      "properties": {
+        "event_count": {
+          "type": "integer",
+          "required": false,
+          "description": "共同事件数"
+        },
+        "style_count": {
+          "type": "integer",
+          "required": false,
+          "description": "共同款号数"
+        }
+      },
+      "description": "两人协作关系"
+    },
+    "REPORTS_TO": {
+      "from": "Person",
+      "to": "Person",
+      "description": "汇报关系（从组织架构导入）"
+    },
+    "BELONGS_TO_DEPT": {
+      "from": "Person",
+      "to": "Department",
+      "description": "人员属于某部门"
+    },
+    "MANAGES": {
+      "from": "Person",
+      "to": "Department",
+      "description": "人员管理某部门"
+    },
+    "PRODUCED_BY": {
+      "from": "Style",
+      "to": "Factory",
+      "properties": {
+        "order_id": {
+          "type": "string",
+          "required": false,
+          "description": "关联订单号"
+        },
+        "start_date": {
+          "type": "string",
+          "required": false,
+          "description": "开始合作日期"
+        }
+      },
+      "description": "款号由某工厂生产（从用户提供数据导入）"
+    },
+    "FROM_EMAIL": {
+      "from": "Event",
+      "to": "Email",
+      "description": "事件来源于某邮件"
+    },
+    "FOLLOWS": {
+      "from": "Event",
+      "to": "Event",
+      "properties": {
+        "time_gap_days": {
+          "type": "integer",
+          "required": false,
+          "description": "两个事件间隔天数"
+        }
+      },
+      "description": "事件时序关系（同 Style 同 Category 按日期排序）"
+    },
+    "HAS_STYLE": {
+      "from": "Customer",
+      "to": "Style",
+      "description": "客户拥有款号"
+    },
+    "ORDERED_BY": {
+      "from": "Style",
+      "to": "Customer",
+      "description": "款号被客户订购"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "total_nodes": 10610,
+  "total_edges": 34328,
+  "node_types": {
+    "Event": 7893,
+    "Style": 1166,
+    "Category": 23,
+    "Email": 1206,
+    "Person": 282,
+    "Factory": 7,
+    "Department": 6,
+    "Customer": 27
+  },
+  "edge_types": {
+    "BELONGS_TO": 6771,
+    "HAS_CATEGORY": 7893,
+    "FROM_EMAIL": 7893,
+    "PRODUCED_BY": 671,
+    "FOLLOWS": 4001,
+    "PARTICIPATED_IN": 4722,
+    "INVOLVED_IN": 1667,
+    "COLLABORATED_WITH": 568,
+    "RESPONSIBLE_FOR": 50,
+    "BELONGS_TO_DEPT": 42,
+    "MANAGES": 2,
+    "ORDERED_BY": 24,
+    "HAS_STYLE": 24
+  },
+  "build_time": "2026-05-01T20:47:45.433588"
+}

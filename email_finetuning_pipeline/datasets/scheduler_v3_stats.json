@@ -1,0 +1,82 @@
+{
+  "generated_at": "2026-05-01T15:37:38.991436",
+  "seed": 42,
+  "train": {
+    "sft_total": 800,
+    "sft_scenes": {
+      "direct_answer": 96,
+      "route_v2": 344,
+      "route_v1": 320,
+      "boundary": 40
+    },
+    "dpo_total": 600,
+    "dpo_scenes": {
+      "route_v1": 228,
+      "boundary": 31,
+      "route_v2": 267,
+      "direct_answer": 74
+    },
+    "dpo_chosen": {
+      "route_v1": 228,
+      "direct_answer": 105,
+      "route_v2": 267
+    },
+    "dpo_rejected": {
+      "route_v2": 333,
+      "route_v1": 121,
+      "direct_answer": 146
+    }
+  },
+  "val": {
+    "sft_total": 100,
+    "sft_scenes": {
+      "route_v1": 40,
+      "route_v2": 43,
+      "direct_answer": 12,
+      "boundary": 5
+    },
+    "dpo_total": 80,
+    "dpo_scenes": {
+      "route_v1": 37,
+      "route_v2": 29,
+      "direct_answer": 10,
+      "boundary": 4
+    },
+    "dpo_chosen": {
+      "route_v1": 37,
+      "route_v2": 29,
+      "direct_answer": 14
+    },
+    "dpo_rejected": {
+      "route_v2": 51,
+      "route_v1": 15,
+      "direct_answer": 14
+    }
+  },
+  "test": {
+    "sft_total": 100,
+    "sft_scenes": {
+      "direct_answer": 12,
+      "route_v1": 40,
+      "route_v2": 43,
+      "boundary": 5
+    },
+    "dpo_total": 80,
+    "dpo_scenes": {
+      "route_v1": 33,
+      "route_v2": 33,
+      "direct_answer": 9,
+      "boundary": 5
+    },
+    "dpo_chosen": {
+      "route_v1": 33,
+      "route_v2": 33,
+      "direct_answer": 14
+    },
+    "dpo_rejected": {
+      "route_v2": 47,
+      "direct_answer": 17,
+      "route_v1": 16
+    }
+  }
+}

@@ -1,0 +1,452 @@
+[
+  {
+    "mock_id": "mock_001",
+    "description": "我的款号进度 - 查询链 my_styles -> style_overview",
+    "user_question": "帮我看看我手头那些款号里，有没有哪个款号的事件特别多或者拖延很严重的？",
+    "person_name": "Paula Cheng",
+    "session_flow": [
+      {
+        "step": "user_input",
+        "role": "user",
+        "content": "帮我看看我手头那些款号里，有没有哪个款号的事件特别多或者拖延很严重的？"
+      },
+      {
+        "step": "v3_routing",
+        "role": "v3",
+        "content": "{\"thought\": \"用户查询款号进度，无具体款号，需要多轮查询获取款号范围\", \"decision\": \"route_v2\"}"
+      },
+      {
+        "step": "v2_round_1",
+        "role": "v2",
+        "content": "{\"thought\": \"用户查询我的款号进度，需要先获取款号列表，筛选事件多或延迟严重的款号\", \"satisfied\": false, \"function_calls\": [{\"name\": \"kg_query\", \"params\": {\"type\": \"my_styles\"}, \"result\": [\"styles\", \"styles.style_id\", \"styles.latest_category\", \"styles.event_count\", \"styles.total_delay_days\", \"total_styles\"]}]}"
+      },
+      {
+        "step": "tool_result_1",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"my_styles\": {\"styles\": [{\"style_id\": \"AW25-KFWTS101\", \"latest_category\": \"出货\", \"event_count\": 5, \"total_delay_days\": 0}, {\"style_id\": \"AW25-KFWTT156\", \"latest_category\": \"面料\", \"event_count\": 3, \"total_delay_days\": 5}, {\"style_id\": \"INDOT23404\", \"latest_category\": \"封样\", \"event_count\": 12, \"total_delay_days\": 15}], \"total_styles\": 3}}"
+      },
+      {
+        "step": "v2_round_2",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取3个款号，其中INDOT23404事件最多(12个)且延迟最严重(15天)，AW25-KFWTT156也有5天延迟。需要查这些款号的详细概览\", \"satisfied\": false, \"function_calls\": [{\"name\": \"kg_query\", \"params\": {\"type\": \"style_overview\"}, \"result\": [\"style_id\", \"people\", \"timeline\", \"by_category\", \"total_events\", \"latest_category\", \"last_update\"]}]}"
+      },
+      {
+        "step": "tool_result_2",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"style_overviews\": [{\"style_id\": \"INDOT23404\", \"people\": [\"Paula Cheng\", \"Iris Jiang\"], \"timeline\": [{\"date\": \"2025-06-01\", \"category\": \"面料\", \"description\": \"面料确认\"}, {\"date\": \"2025-06-15\", \"category\": \"封样\", \"description\": \"封样通过\"}], \"by_category\": {\"面料\": [{\"description\": \"面料确认\", \"delay_days\": 2}], \"封样\": [{\"description\": \"封样通过\", \"delay_days\": 0}]}, \"total_events\": 12, \"latest_category\": \"封样\", \"last_update\": \"2025-06-20\"}, {\"style_id\": \"AW25-KFWTT156\", \"people\": [\"Paula Cheng\"], \"timeline\": [{\"date\": \"2025-06-10\", \"category\": \"面料\", \"description\": \"面料延期\"}], \"by_category\": {\"面料\": [{\"description\": \"面料延期\", \"delay_days\": 5}]}, \"total_events\": 3, \"latest_category\": \"面料\", \"last_update\": \"2025-06-18\"}], \"_meta\": {\"primary_total\": 3, \"secondary_success\": 2}}"
+      },
+      {
+        "step": "v2_round_3",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取所有款号的详细概览，信息满足用户提问。INDOT23404事件最多(12个)且有15天延迟，AW25-KFWTT156延迟5天\", \"satisfied\": true, \"function_calls\": [{\"name\": \"generate_answer\", \"params\": {\"template\": \"my_styles_summary\", \"data\": {\"summaries\": [{\"style_id\": \"INDOT23404\", \"status\": \"延期\", \"current_stage\": \"封样\", \"delay_days\": 15, \"event_count\": 12}, {\"style_id\": \"AW25-KFWTT156\", \"status\": \"延期\", \"current_stage\": \"面料\", \"delay_days\": 5, \"event_count\": 3}, {\"style_id\": \"AW25-KFWTS101\", \"status\": \"正常\", \"current_stage\": \"出货\", \"delay_days\": 0, \"event_count\": 5}], \"total\": 3}}}]}"
+      },
+      {
+        "step": "final_answer",
+        "role": "assistant",
+        "content": "共查询到 **3** 个款号：\n\n🔴 **高风险 - 事件多且延期严重 (1个)**：\n  • **INDOT23404** - 封样阶段 - 延期15天 - 12个事件\n    参与人员：Paula Cheng, Iris Jiang\n    最近更新：2025-06-20\n\n⚠️ **延期 (1个)**：\n  • **AW25-KFWTT156** - 面料阶段 - 延期5天 - 3个事件\n    参与人员：Paula Cheng\n    最近更新：2025-06-18\n\n✅ **正常 (1个)**：\n  • **AW25-KFWTS101** - 出货阶段 - 无延期 - 5个事件"
+      }
+    ]
+  },
+  {
+    "mock_id": "mock_002",
+    "description": "面料阶段异常 - 查询链 my_styles -> semantic_search",
+    "user_question": "帮我看看我负责的款号里，有没有哪些款号在面料阶段有异常？",
+    "person_name": "Paula Cheng",
+    "session_flow": [
+      {
+        "step": "user_input",
+        "role": "user",
+        "content": "帮我看看我负责的款号里，有没有哪些款号在面料阶段有异常？"
+      },
+      {
+        "step": "v3_routing",
+        "role": "v3",
+        "content": "{\"thought\": \"用户查询面料阶段异常，无具体款号，需要多轮查询\", \"decision\": \"route_v2\"}"
+      },
+      {
+        "step": "v2_round_1",
+        "role": "v2",
+        "content": "{\"thought\": \"用户查询面料阶段异常，需要先获取我的款号列表，再在这些款号中语义检索面料相关异常\", \"satisfied\": false, \"function_calls\": [{\"name\": \"kg_query\", \"params\": {\"type\": \"my_styles\"}, \"result\": [\"styles\", \"styles.style_id\", \"total_styles\"]}]}"
+      },
+      {
+        "step": "tool_result_1",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"my_styles\": {\"styles\": [{\"style_id\": \"AW25-KFWTS101\"}, {\"style_id\": \"AW25-KFWTT156\"}, {\"style_id\": \"INDOT23404\"}], \"total_styles\": 3}}"
+      },
+      {
+        "step": "v2_round_2",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取3个款号，需要在其中语义检索面料阶段异常\", \"satisfied\": false, \"function_calls\": [{\"name\": \"rag_query\", \"params\": {\"type\": \"semantic_search\", \"query\": \"面料异常 问题 延期\"}, \"result\": [\"events\", \"events.style_id\", \"events.description\", \"events.category\", \"events.score\"]}]}"
+      },
+      {
+        "step": "tool_result_2",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"semantic_searches\": [{\"style_id\": \"AW25-KFWTT156\", \"description\": \"面料颜色与确认样不符，需要重新打色卡\", \"category\": \"面料\", \"score\": 0.92}, {\"style_id\": \"INDOT23404\", \"description\": \"面料供应商延期交货，预计推迟一周\", \"category\": \"面料\", \"score\": 0.88}], \"_meta\": {\"primary_total\": 3, \"secondary_success\": 2}}"
+      },
+      {
+        "step": "v2_round_3",
+        "role": "v2",
+        "content": "{\"thought\": \"已找到2个款号的面料异常事件，信息满足用户提问\", \"satisfied\": true, \"function_calls\": [{\"name\": \"generate_answer\", \"params\": {\"template\": \"style_list\", \"data\": {\"message\": \"发现2个款号存在面料阶段异常\", \"events\": [{\"style_id\": \"AW25-KFWTT156\", \"issue\": \"面料颜色与确认样不符，需要重新打色卡\"}, {\"style_id\": \"INDOT23404\", \"issue\": \"面料供应商延期交货，预计推迟一周\"}]}}}]}"
+      },
+      {
+        "step": "final_answer",
+        "role": "assistant",
+        "content": "发现 **2** 个款号存在面料阶段异常：\n\n1. **AW25-KFWTT156**\n   - 问题：面料颜色与确认样不符，需要重新打色卡\n   - 相关度：92%\n\n2. **INDOT23404**\n   - 问题：面料供应商延期交货，预计推迟一周\n   - 相关度：88%\n\n建议尽快与面料供应商确认交期，并跟进色卡重新打样进度。"
+      }
+    ]
+  },
+  {
+    "mock_id": "mock_003",
+    "description": "款号时间线更新 - 查询链 my_styles -> timeline",
+    "user_question": "昨天我查了所有跟的款号，今天有没有新增或更新的？",
+    "person_name": "Paula Cheng",
+    "session_flow": [
+      {
+        "step": "user_input",
+        "role": "user",
+        "content": "昨天我查了所有跟的款号，今天有没有新增或更新的？"
+      },
+      {
+        "step": "v3_routing",
+        "role": "v3",
+        "content": "{\"thought\": \"用户查询款号时间线更新，无具体款号，需要多轮查询\", \"decision\": \"route_v2\"}"
+      },
+      {
+        "step": "v2_round_1",
+        "role": "v2",
+        "content": "{\"thought\": \"用户查询时间线更新，需要先获取我的款号列表\", \"satisfied\": false, \"function_calls\": [{\"name\": \"kg_query\", \"params\": {\"type\": \"my_styles\"}, \"result\": [\"styles\", \"styles.style_id\", \"styles.latest_category\", \"styles.event_count\", \"total_styles\"]}]}"
+      },
+      {
+        "step": "tool_result_1",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"my_styles\": {\"styles\": [{\"style_id\": \"AW25-KFWTS101\", \"latest_category\": \"出货\", \"event_count\": 5}, {\"style_id\": \"AW25-KFWTT156\", \"latest_category\": \"面料\", \"event_count\": 3}, {\"style_id\": \"INDOT23404\", \"latest_category\": \"封样\", \"event_count\": 12}], \"total_styles\": 3}}"
+      },
+      {
+        "step": "v2_round_2",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取3个款号，需要查时间线看最近是否有更新\", \"satisfied\": false, \"function_calls\": [{\"name\": \"kg_query\", \"params\": {\"type\": \"timeline\"}, \"result\": [\"style_id\", \"events\", \"events.date\", \"events.category\", \"events.description\", \"total\"]}]}"
+      },
+      {
+        "step": "tool_result_2",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"timelines\": [{\"style_id\": \"AW25-KFWTS101\", \"events\": [{\"date\": \"2025-06-20\", \"category\": \"出货\", \"description\": \"出货安排确认\"}, {\"date\": \"2025-06-19\", \"category\": \"大货\", \"description\": \"大货生产完成\"}], \"total\": 2}, {\"style_id\": \"AW25-KFWTT156\", \"events\": [{\"date\": \"2025-06-18\", \"category\": \"面料\", \"description\": \"面料延期\"}], \"total\": 1}, {\"style_id\": \"INDOT23404\", \"events\": [{\"date\": \"2025-06-20\", \"category\": \"封样\", \"description\": \"封样通过\"}], \"total\": 1}], \"_meta\": {\"primary_total\": 3, \"secondary_success\": 3}}"
+      },
+      {
+        "step": "v2_round_3",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取所有款号的最新时间线，AW25-KFWTS101和INDOT23404在6月20日有更新，信息满足用户提问\", \"satisfied\": true, \"function_calls\": [{\"name\": \"generate_answer\", \"params\": {\"template\": \"my_styles_summary\", \"data\": {\"message\": \"今天有2个款号有更新\", \"updates\": [{\"style_id\": \"AW25-KFWTS101\", \"date\": \"2025-06-20\", \"event\": \"出货安排确认\"}, {\"style_id\": \"INDOT23404\", \"date\": \"2025-06-20\", \"event\": \"封样通过\"}]}}}]}"
+      },
+      {
+        "step": "final_answer",
+        "role": "assistant",
+        "content": "今天有 **2** 个款号有更新（2025-06-20）：\n\n1. **AW25-KFWTS101** - 出货阶段\n   - 最新事件：出货安排确认（2025-06-20）\n   - 前序事件：大货生产完成（2025-06-19）\n\n2. **INDOT23404** - 封样阶段\n   - 最新事件：封样通过（2025-06-20）\n\n其他款号（AW25-KFWTT156）最新事件为2025-06-18，今天暂无更新。"
+      }
+    ]
+  },
+  {
+    "mock_id": "mock_004",
+    "description": "人员款号延迟 - 查询链 person_styles -> style_overview",
+    "user_question": "帮我看看我跟的那些款，有没有哪些款是延迟特别严重的？我想重点跟进一下。",
+    "person_name": "Paula Cheng",
+    "session_flow": [
+      {
+        "step": "user_input",
+        "role": "user",
+        "content": "帮我看看我跟的那些款，有没有哪些款是延迟特别严重的？我想重点跟进一下。"
+      },
+      {
+        "step": "v3_routing",
+        "role": "v3",
+        "content": "{\"thought\": \"用户查询款号延迟情况，提到'我跟的款'，需要多轮查询\", \"decision\": \"route_v2\"}"
+      },
+      {
+        "step": "v2_round_1",
+        "role": "v2",
+        "content": "{\"thought\": \"用户查询延迟严重的款号，需要先获取Paula Cheng的款号列表\", \"satisfied\": false, \"function_calls\": [{\"name\": \"kg_query\", \"params\": {\"type\": \"person_styles\", \"person_name\": \"Paula Cheng\"}, \"result\": [\"styles\", \"styles.style_id\", \"styles.total_delay_days\", \"total_styles\"]}]}"
+      },
+      {
+        "step": "tool_result_1",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"person_styles\": {\"styles\": [{\"style_id\": \"AW25-KFWTS101\", \"total_delay_days\": 0}, {\"style_id\": \"AW25-KFWTT156\", \"total_delay_days\": 5}, {\"style_id\": \"INDOT23404\", \"total_delay_days\": 15}, {\"style_id\": \"SS25IACB201\", \"total_delay_days\": 30}], \"total_styles\": 4}}"
+      },
+      {
+        "step": "v2_round_2",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取4个款号，SS25IACB201延迟最严重(30天)，INDOT23404延迟15天。需要查这些款号的详细概览\", \"satisfied\": false, \"function_calls\": [{\"name\": \"kg_query\", \"params\": {\"type\": \"style_overview\"}, \"result\": [\"style_id\", \"people\", \"timeline\", \"by_category\", \"total_events\", \"latest_category\"]}]}"
+      },
+      {
+        "step": "tool_result_2",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"style_overviews\": [{\"style_id\": \"SS25IACB201\", \"people\": [\"Paula Cheng\", \"Lisa Sun\"], \"timeline\": [{\"date\": \"2025-05-01\", \"category\": \"面料\", \"description\": \"面料确认\"}, {\"date\": \"2025-06-01\", \"category\": \"大货\", \"description\": \"大货延期\"}], \"by_category\": {\"面料\": [{\"description\": \"面料确认\"}], \"大货\": [{\"description\": \"大货延期\", \"delay_days\": 30}]}, \"total_events\": 8, \"latest_category\": \"大货\"}, {\"style_id\": \"INDOT23404\", \"people\": [\"Paula Cheng\", \"Iris Jiang\"], \"timeline\": [{\"date\": \"2025-06-01\", \"category\": \"面料\", \"description\": \"面料确认\"}, {\"date\": \"2025-06-15\", \"category\": \"封样\", \"description\": \"封样通过\"}], \"by_category\": {\"面料\": [{\"description\": \"面料确认\", \"delay_days\": 15}]}, \"total_events\": 12, \"latest_category\": \"封样\"}], \"_meta\": {\"primary_total\": 4, \"secondary_success\": 2}}"
+      },
+      {
+        "step": "v2_round_3",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取延迟严重款号的详细概览，SS25IACB201延迟30天在大货阶段，INDOT23404延迟15天。信息满足用户提问\", \"satisfied\": true, \"function_calls\": [{\"name\": \"generate_answer\", \"params\": {\"template\": \"my_styles_summary\", \"data\": {\"summaries\": [{\"style_id\": \"SS25IACB201\", \"status\": \"延期\", \"current_stage\": \"大货\", \"delay_days\": 30, \"event_count\": 8}, {\"style_id\": \"INDOT23404\", \"status\": \"延期\", \"current_stage\": \"封样\", \"delay_days\": 15, \"event_count\": 12}], \"total\": 2, \"note\": \"重点跟进款号\"}}}]}"
+      },
+      {
+        "step": "final_answer",
+        "role": "assistant",
+        "content": "发现 **2** 个款号延迟严重，建议重点跟进：\n\n🔴 **SS25IACB201** - 大货阶段 - 延期30天\n   参与人员：Paula Cheng, Lisa Sun\n   事件数：8个\n   最新动态：大货延期（2025-06-01）\n\n⚠️ **INDOT23404** - 封样阶段 - 延期15天\n   参与人员：Paula Cheng, Iris Jiang\n   事件数：12个\n   最新动态：封样通过（2025-06-15）\n\n其他款号（AW25-KFWTS101、AW25-KFWTT156）暂无严重延迟。"
+      }
+    ]
+  },
+  {
+    "mock_id": "mock_005",
+    "description": "语义检索后查详情 - 查询链 semantic_search -> style_overview",
+    "user_question": "帮我查一下最近有没有哪个款在试身样阶段客人给了意见但看不到图片，我想看看那个款的完整情况，包括都有哪些人参与、现在到哪个阶段了。",
+    "person_name": "Paula Cheng",
+    "session_flow": [
+      {
+        "step": "user_input",
+        "role": "user",
+        "content": "帮我查一下最近有没有哪个款在试身样阶段客人给了意见但看不到图片，我想看看那个款的完整情况，包括都有哪些人参与、现在到哪个阶段了。"
+      },
+      {
+        "step": "v3_routing",
+        "role": "v3",
+        "content": "{\"thought\": \"用户查询具体业务场景，无款号，需要语义检索后查详情\", \"decision\": \"route_v2\"}"
+      },
+      {
+        "step": "v2_round_1",
+        "role": "v2",
+        "content": "{\"thought\": \"用户查询试身样阶段客人给意见但看不到图片的情况，需要先语义检索相关事件\", \"satisfied\": false, \"function_calls\": [{\"name\": \"rag_query\", \"params\": {\"type\": \"semantic_search\", \"query\": \"试身样 客人意见 看不到图片\"}, \"result\": [\"events\", \"events.style_id\", \"events.description\", \"events.category\", \"events.score\"]}]}"
+      },
+      {
+        "step": "tool_result_1",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"semantic_search\": {\"events\": [{\"style_id\": \"AW25-KFWTS101\", \"description\": \"客人对试身样给出修改意见，但邮件中没有附带图片\", \"category\": \"样衣\", \"score\": 0.95}, {\"style_id\": \"INDOT23404\", \"description\": \"试身样反馈：袖长需要调整，图片缺失\", \"category\": \"样衣\", \"score\": 0.91}], \"total\": 2}}"
+      },
+      {
+        "step": "v2_round_2",
+        "role": "v2",
+        "content": "{\"thought\": \"已找到2个相关款号，AW25-KFWTS101相关度最高(95%)，需要查其详细概览\", \"satisfied\": false, \"function_calls\": [{\"name\": \"kg_query\", \"params\": {\"type\": \"style_overview\"}, \"result\": [\"style_id\", \"people\", \"timeline\", \"by_category\", \"total_events\", \"latest_category\"]}]}"
+      },
+      {
+        "step": "tool_result_2",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"style_overviews\": [{\"style_id\": \"AW25-KFWTS101\", \"people\": [\"Paula Cheng\", \"Iris Jiang\", \"Lisa Sun\"], \"timeline\": [{\"date\": \"2025-06-10\", \"category\": \"样衣\", \"description\": \"试身样提交\"}, {\"date\": \"2025-06-12\", \"category\": \"样衣\", \"description\": \"客人意见：袖长调整，无图片\"}, {\"date\": \"2025-06-15\", \"category\": \"出货\", \"description\": \"出货安排\"}], \"by_category\": {\"样衣\": [{\"description\": \"试身样提交\"}, {\"description\": \"客人意见：袖长调整，无图片\"}], \"出货\": [{\"description\": \"出货安排\"}]}, \"total_events\": 5, \"latest_category\": \"出货\"}], \"_meta\": {\"primary_total\": 2, \"secondary_success\": 1}}"
+      },
+      {
+        "step": "v2_round_3",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取AW25-KFWTS101的完整概览，信息满足用户提问\", \"satisfied\": true, \"function_calls\": [{\"name\": \"generate_answer\", \"params\": {\"template\": \"style_list\", \"data\": {\"style_id\": \"AW25-KFWTS101\", \"people\": [\"Paula Cheng\", \"Iris Jiang\", \"Lisa Sun\"], \"current_stage\": \"出货\", \"issue\": \"试身样客人意见无图片\"}}}]}"
+      },
+      {
+        "step": "final_answer",
+        "role": "assistant",
+        "content": "找到相关款号：**AW25-KFWTS101**\n\n**当前阶段**：出货\n\n**参与人员**：Paula Cheng, Iris Jiang, Lisa Sun\n\n**试身样阶段情况**：\n- 2025-06-10：试身样提交\n- 2025-06-12：客人给出修改意见（袖长调整），但邮件中未附带图片\n\n**建议**：\n1. 联系客人补充试身样图片\n2. 确认袖长调整的具体尺寸要求\n3. 该款号目前已进入出货阶段，需确认修改是否影响出货计划"
+      }
+    ]
+  },
+  {
+    "mock_id": "mock_006",
+    "description": "工厂款号延迟详情 - 查询链 factory_styles -> style_summaries",
+    "user_question": "帮我看看这个工厂最近有哪些款号有延迟？顺便把那些延迟的款号详情也调出来吧。",
+    "person_name": "Paula Cheng",
+    "session_flow": [
+      {
+        "step": "user_input",
+        "role": "user",
+        "content": "帮我看看这个工厂最近有哪些款号有延迟？顺便把那些延迟的款号详情也调出来吧。"
+      },
+      {
+        "step": "v3_routing",
+        "role": "v3",
+        "content": "{\"thought\": \"用户查询工厂款号延迟，提到'这个工厂'但未指定具体工厂，需要推断或查询\", \"decision\": \"route_v2\"}"
+      },
+      {
+        "step": "v2_round_1",
+        "role": "v2",
+        "content": "{\"thought\": \"用户查询工厂款号延迟，未指定工厂名称，需要先获取工厂款号列表。默认查询浙江溢蝶服饰科技有限公司\", \"satisfied\": false, \"function_calls\": [{\"name\": \"kg_query\", \"params\": {\"type\": \"factory_styles\", \"factory_name\": \"浙江溢蝶服饰科技有限公司\"}, \"result\": [\"styles\", \"styles.style_id\", \"styles.total_delay_days\", \"total_styles\"]}]}"
+      },
+      {
+        "step": "tool_result_1",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"factory_styles\": {\"styles\": [{\"style_id\": \"AW25-KFWTS101\", \"total_delay_days\": 0}, {\"style_id\": \"AW25-KFWTT156\", \"total_delay_days\": 5}, {\"style_id\": \"INDOT23404\", \"total_delay_days\": 15}], \"total_styles\": 3}}"
+      },
+      {
+        "step": "v2_round_2",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取工厂款号列表，2个款号有延迟，需要查摘要详情\", \"satisfied\": false, \"function_calls\": [{\"name\": \"kg_query\", \"params\": {\"type\": \"style_summaries\"}, \"result\": [\"summaries\", \"summaries.style_id\", \"summaries.status\", \"summaries.current_stage\", \"summaries.delay_days\", \"total\"]}]}"
+      },
+      {
+        "step": "tool_result_2",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"style_summaries\": {\"summaries\": [{\"style_id\": \"AW25-KFWTT156\", \"status\": \"延期\", \"current_stage\": \"面料\", \"delay_days\": 5, \"last_update\": \"2025-06-18\"}, {\"style_id\": \"INDOT23404\", \"status\": \"延期\", \"current_stage\": \"封样\", \"delay_days\": 15, \"last_update\": \"2025-06-20\"}], \"total\": 2}}, \"_meta\": {\"primary_total\": 3, \"secondary_success\": 2}"
+      },
+      {
+        "step": "v2_round_3",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取延迟款号的摘要详情，信息满足用户提问\", \"satisfied\": true, \"function_calls\": [{\"name\": \"generate_answer\", \"params\": {\"template\": \"factory_styles_summary\", \"data\": {\"factory\": \"浙江溢蝶服饰科技有限公司\", \"styles\": [\"AW25-KFWTT156\", \"INDOT23404\"], \"delays\": [5, 15], \"total\": 3}}}]}"
+      },
+      {
+        "step": "final_answer",
+        "role": "assistant",
+        "content": "**浙江溢蝶服饰科技有限公司** 在制款号：**3** 个\n\n⚠️ **延迟款号 (2个)**：\n\n1. **INDOT23404** - 封样阶段 - 延期15天\n   最近更新：2025-06-20\n\n2. **AW25-KFWTT156** - 面料阶段 - 延期5天\n   最近更新：2025-06-18\n\n✅ **正常款号 (1个)**：\n   AW25-KFWTS101 - 无延期\n\n建议重点关注 INDOT23404 的封样进度和 AW25-KFWTT156 的面料交期。"
+      }
+    ]
+  },
+  {
+    "mock_id": "mock_007",
+    "description": "条件筛选后语义检索 - 查询链 find_styles_with_conditions -> semantic_search",
+    "user_question": "帮我看看最近一批延期最严重的款号是哪些？都超过两个月了，到底卡在哪个环节？",
+    "person_name": "Paula Cheng",
+    "session_flow": [
+      {
+        "step": "user_input",
+        "role": "user",
+        "content": "帮我看看最近一批延期最严重的款号是哪些？都超过两个月了，到底卡在哪个环节？"
+      },
+      {
+        "step": "v3_routing",
+        "role": "v3",
+        "content": "{\"thought\": \"用户查询延期严重的款号，超过两个月，需要先筛选再查详情\", \"decision\": \"route_v2\"}"
+      },
+      {
+        "step": "v2_round_1",
+        "role": "v2",
+        "content": "{\"thought\": \"用户查询延期超过两个月的款号，需要先按条件筛选\", \"satisfied\": false, \"function_calls\": [{\"name\": \"kg_query\", \"params\": {\"type\": \"find_styles_with_conditions\", \"min_delay_days\": 60}, \"result\": [\"styles\", \"styles.style_id\", \"styles.matched_categories\", \"styles.total_delay_days\", \"total\"]}]}"
+      },
+      {
+        "step": "tool_result_1",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"find_styles_with_conditions\": {\"styles\": [{\"style_id\": \"SS25IACB201\", \"matched_categories\": [\"大货\"], \"total_delay_days\": 75}, {\"style_id\": \"INDOT26908\", \"matched_categories\": [\"面料\"], \"total_delay_days\": 68}], \"total\": 2}}"
+      },
+      {
+        "step": "v2_round_2",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取2个延期超过60天的款号，需要语义检索了解具体卡在哪个环节\", \"satisfied\": false, \"function_calls\": [{\"name\": \"rag_query\", \"params\": {\"type\": \"semantic_search\", \"query\": \"延期 卡住 环节 原因\"}, \"result\": [\"events\", \"events.style_id\", \"events.description\", \"events.category\", \"events.delay_days\"]}]}"
+      },
+      {
+        "step": "tool_result_2",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"semantic_searches\": [{\"style_id\": \"SS25IACB201\", \"description\": \"大货生产因面料短缺暂停，预计延期两周\", \"category\": \"大货\", \"delay_days\": 75}, {\"style_id\": \"INDOT26908\", \"description\": \"面料供应商交期延误，色卡反复确认中\", \"category\": \"面料\", \"delay_days\": 68}], \"_meta\": {\"primary_total\": 2, \"secondary_success\": 2}}"
+      },
+      {
+        "step": "v2_round_3",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取延期款号的具体原因，SS25IACB201卡在大货生产（面料短缺），INDOT26908卡在面料确认。信息满足用户提问\", \"satisfied\": true, \"function_calls\": [{\"name\": \"generate_answer\", \"params\": {\"template\": \"style_list\", \"data\": {\"message\": \"发现2个款号延期超过2个月\", \"styles\": [{\"style_id\": \"SS25IACB201\", \"delay\": 75, \"stage\": \"大货\", \"reason\": \"面料短缺，生产暂停\"}, {\"style_id\": \"INDOT26908\", \"delay\": 68, \"stage\": \"面料\", \"reason\": \"供应商交期延误，色卡反复确认\"}]}}}]}"
+      },
+      {
+        "step": "final_answer",
+        "role": "assistant",
+        "content": "发现 **2** 个款号延期超过2个月：\n\n🔴 **SS25IACB201** - 延期75天\n   - 卡住环节：**大货生产**\n   - 原因：面料短缺，生产暂停\n   - 预计：延期两周\n\n🔴 **INDOT26908** - 延期68天\n   - 卡住环节：**面料确认**\n   - 原因：供应商交期延误，色卡反复确认中\n\n**建议**：\n1. SS25IACB201：紧急联系面料供应商确认到货时间\n2. INDOT26908：加快色卡确认流程，或考虑更换供应商"
+      }
+    ]
+  },
+  {
+    "mock_id": "mock_008",
+    "description": "我的款号列表 - 单轮 my_styles",
+    "user_question": "帮我查一下，我目前跟的款号里，有哪些是有延误的？",
+    "person_name": "Paula Cheng",
+    "session_flow": [
+      {
+        "step": "user_input",
+        "role": "user",
+        "content": "帮我查一下，我目前跟的款号里，有哪些是有延误的？"
+      },
+      {
+        "step": "v3_routing",
+        "role": "v3",
+        "content": "{\"thought\": \"用户查询我的款号中哪些有延误，单轮查询即可满足\", \"decision\": \"route_v2\"}"
+      },
+      {
+        "step": "v2_round_1",
+        "role": "v2",
+        "content": "{\"thought\": \"用户查询我的款号中哪些有延误，直接用my_styles查询即可获取全部款号及延迟信息\", \"satisfied\": false, \"function_calls\": [{\"name\": \"kg_query\", \"params\": {\"type\": \"my_styles\"}, \"result\": [\"styles\", \"styles.style_id\", \"styles.latest_category\", \"styles.event_count\", \"styles.total_delay_days\", \"total_styles\"]}]}"
+      },
+      {
+        "step": "tool_result_1",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"my_styles\": {\"styles\": [{\"style_id\": \"AW25-KFWTS101\", \"latest_category\": \"出货\", \"event_count\": 5, \"total_delay_days\": 0}, {\"style_id\": \"AW25-KFWTT156\", \"latest_category\": \"面料\", \"event_count\": 3, \"total_delay_days\": 5}, {\"style_id\": \"INDOT23404\", \"latest_category\": \"封样\", \"event_count\": 12, \"total_delay_days\": 15}], \"total_styles\": 3}}"
+      },
+      {
+        "step": "v2_round_2",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取我的款号列表，2个有延误，信息满足用户提问\", \"satisfied\": true, \"function_calls\": [{\"name\": \"generate_answer\", \"params\": {\"template\": \"my_styles_summary\", \"data\": {\"summaries\": [{\"style_id\": \"INDOT23404\", \"status\": \"延期\", \"current_stage\": \"封样\", \"delay_days\": 15}, {\"style_id\": \"AW25-KFWTT156\", \"status\": \"延期\", \"current_stage\": \"面料\", \"delay_days\": 5}, {\"style_id\": \"AW25-KFWTS101\", \"status\": \"正常\", \"current_stage\": \"出货\", \"delay_days\": 0}], \"total\": 3}}}]}"
+      },
+      {
+        "step": "final_answer",
+        "role": "assistant",
+        "content": "您目前跟的 **3** 个款号中：\n\n⚠️ **有延误 (2个)**：\n  • **INDOT23404** - 封样阶段 - 延期15天\n  • **AW25-KFWTT156** - 面料阶段 - 延期5天\n\n✅ **正常 (1个)**：\n  • **AW25-KFWTS101** - 出货阶段 - 无延期"
+      }
+    ]
+  },
+  {
+    "mock_id": "mock_009",
+    "description": "合作同事查询 - 单轮 collaborators",
+    "user_question": "帮我看看我跟的款号里，哪些同事跟我合作最多？",
+    "person_name": "Paula Cheng",
+    "session_flow": [
+      {
+        "step": "user_input",
+        "role": "user",
+        "content": "帮我看看我跟的款号里，哪些同事跟我合作最多？"
+      },
+      {
+        "step": "v3_routing",
+        "role": "v3",
+        "content": "{\"thought\": \"用户查询合作同事，单轮查询即可满足\", \"decision\": \"route_v2\"}"
+      },
+      {
+        "step": "v2_round_1",
+        "role": "v2",
+        "content": "{\"thought\": \"用户查询合作同事，直接用collaborators查询\", \"satisfied\": false, \"function_calls\": [{\"name\": \"kg_query\", \"params\": {\"type\": \"collaborators\", \"person_name\": \"Paula Cheng\", \"top_k\": 10}, \"result\": [\"collaborators\", \"collaborators.name\", \"collaborators.event_count\", \"collaborators.style_count\", \"total_unique\"]}]}"
+      },
+      {
+        "step": "tool_result_1",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"collaborators\": {\"collaborators\": [{\"name\": \"Iris Jiang\", \"event_count\": 45, \"style_count\": 12}, {\"name\": \"Lisa Sun\", \"event_count\": 32, \"style_count\": 8}, {\"name\": \"Sunny Padda\", \"event_count\": 18, \"style_count\": 5}], \"total_unique\": 3}}"
+      },
+      {
+        "step": "v2_round_2",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取合作同事列表，信息满足用户提问\", \"satisfied\": true, \"function_calls\": [{\"name\": \"generate_answer\", \"params\": {\"template\": \"person_styles_summary\", \"data\": {\"person\": \"Paula Cheng\", \"collaborators\": [{\"name\": \"Iris Jiang\", \"event_count\": 45, \"style_count\": 12}, {\"name\": \"Lisa Sun\", \"event_count\": 32, \"style_count\": 8}, {\"name\": \"Sunny Padda\", \"event_count\": 18, \"style_count\": 5}]}}}]}"
+      },
+      {
+        "step": "final_answer",
+        "role": "assistant",
+        "content": "与您合作最多的同事（Top 3）：\n\n1. **Iris Jiang**\n   - 共同事件：45个\n   - 共同款号：12个\n\n2. **Lisa Sun**\n   - 共同事件：32个\n   - 共同款号：8个\n\n3. **Sunny Padda**\n   - 共同事件：18个\n   - 共同款号：5个\n\n总计与 **3** 位同事有合作记录。"
+      }
+    ]
+  },
+  {
+    "mock_id": "mock_010",
+    "description": "术语翻译 - 单轮 term_translation",
+    "user_question": "帮我查一下塔夫绸这个面料术语的中英文对照，我刚收到一个客户询价，里面提到了这个面料。",
+    "person_name": "Paula Cheng",
+    "session_flow": [
+      {
+        "step": "user_input",
+        "role": "user",
+        "content": "帮我查一下塔夫绸这个面料术语的中英文对照，我刚收到一个客户询价，里面提到了这个面料。"
+      },
+      {
+        "step": "v3_routing",
+        "role": "v3",
+        "content": "{\"thought\": \"用户查询术语翻译，单轮查询即可满足\", \"decision\": \"route_v2\"}"
+      },
+      {
+        "step": "v2_round_1",
+        "role": "v2",
+        "content": "{\"thought\": \"用户查询术语翻译（塔夫绸），直接用term_translation查询\", \"satisfied\": false, \"function_calls\": [{\"name\": \"rag_query\", \"params\": {\"type\": \"term_translation\", \"query\": \"塔夫绸\"}, \"result\": [\"translations\", \"translations.chinese\", \"translations.english\", \"translations.category\", \"best_match\"]}]}"
+      },
+      {
+        "step": "tool_result_1",
+        "role": "tool",
+        "content": "{\"status\": \"success\", \"term_translation\": {\"translations\": [{\"chinese\": \"塔夫绸\", \"english\": \"taffeta\", \"category\": \"面料\"}, {\"chinese\": \"涤纶塔夫绸\", \"english\": \"polyester taffeta\", \"category\": \"面料\"}], \"best_match\": {\"chinese\": \"塔夫绸\", \"english\": \"taffeta\", \"category\": \"面料\"}}}"
+      },
+      {
+        "step": "v2_round_2",
+        "role": "v2",
+        "content": "{\"thought\": \"已获取术语翻译结果，信息满足用户提问\", \"satisfied\": true, \"function_calls\": [{\"name\": \"generate_answer\", \"params\": {\"template\": \"term_translation\", \"data\": {\"term\": \"塔夫绸\", \"translation\": \"taffeta\", \"category\": \"面料\"}}}]}"
+      },
+      {
+        "step": "final_answer",
+        "role": "assistant",
+        "content": "**塔夫绸** 译为：**taffeta**\n\n分类：面料\n\n相关术语：\n- 涤纶塔夫绸 → polyester taffeta"
+      }
+    ]
+  }
+]

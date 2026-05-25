@@ -1,0 +1,53 @@
+### V3 调度器 DPO 训练配置
+
+model_name_or_path: Qwen/Qwen2.5-7B-Instruct
+adapter_name_or_path: ./outputs/sft-v3
+template: qwen
+
+stage: dpo
+do_train: true
+
+dataset: dpo_scheduler_v3_train
+eval_dataset: dpo_scheduler_v3_val
+cutoff_len: 4096
+max_samples: null
+overwrite_cache: true
+preprocessing_num_workers: 16
+
+output_dir: ./outputs/dpo-v3
+logging_steps: 10
+plot_loss: true
+overwrite_output_dir: true
+
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 8
+learning_rate: 5.0e-7
+num_train_epochs: 3.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+ddp_timeout: 180000000
+
+finetuning_type: lora
+lora_target: all
+lora_rank: 16
+lora_alpha: 32
+lora_dropout: 0.1
+use_rslora: false
+
+optim: adamw_torch
+weight_decay: 0.0001
+max_grad_norm: 1.0
+
+pref_beta: 0.1
+pref_loss: sigmoid
+pref_ftx: 0.0
+
+per_device_eval_batch_size: 1
+eval_strategy: steps
+eval_steps: 50
+save_strategy: steps
+save_steps: 50
+load_best_model_at_end: true
+
+report_to: tensorboard

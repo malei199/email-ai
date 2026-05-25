@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-04-27T22:10:35.015570",
+  "sft": {
+    "total": 100,
+    "scene_distribution": {
+      "route_v1": 35,
+      "boundary": 5,
+      "route_v2": 30,
+      "route_v2_then_v1": 18,
+      "direct_answer": 12
+    }
+  },
+  "dpo": {
+    "total": 100,
+    "scene_distribution": {
+      "route_v1": 35,
+      "route_v2_then_v1": 18,
+      "route_v2": 30,
+      "boundary": 5,
+      "direct_answer": 12
+    },
+    "chosen_decisions": {
+      "route_v1": 35,
+      "route_v2_then_v1": 18,
+      "route_v2": 30,
+      "direct_answer": 17
+    },
+    "rejected_decisions": {
+      "route_v2_then_v1": 14,
+      "route_v2": 48,
+      "direct_answer": 17,
+      "route_v1": 21
+    }
+  }
+}

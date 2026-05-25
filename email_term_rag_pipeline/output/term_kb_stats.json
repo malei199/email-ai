@@ -1,0 +1,15 @@
+{
+  "collection_name": "clothing_terms",
+  "total_entries": 21686,
+  "embedding_model": "BAAI/bge-large-zh-v1.5",
+  "category_distribution": {
+    "设计打样设备和工具": 11933,
+    "服装设计制图·人体主要部位": 2687,
+    "款式名称": 2557,
+    "颜色": 1955,
+    "服饰品·帽": 1412,
+    "原辅料检验": 770,
+    "服装成品·一般名称": 267,
+    "线迹": 105
+  }
+}

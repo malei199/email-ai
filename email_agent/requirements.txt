@@ -1,0 +1,17 @@
+# 邮件智能助手依赖
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+sqlalchemy>=2.0.0
+pydantic>=2.5.0
+pydantic[email]>=2.5.0
+python-multipart>=0.0.6
+
+# 下游系统共享依赖
+chromadb>=0.4.0
+sentence-transformers>=2.2.0
+networkx>=3.0
+
+# 模型推理（按需加载）
+# torch>=2.0.0
+# transformers>=4.35.0
+# peft>=0.6.0

@@ -1,0 +1,52 @@
+{
+  "departments": [
+    {
+      "id": "dept_biz",
+      "name": "业务部",
+      "manager": "u001"
+    },
+    {
+      "id": "dept_tech",
+      "name": "技术部",
+      "manager": "u005"
+    }
+  ],
+  "users": [
+    {
+      "id": "u001",
+      "name": "Paula Cheng",
+      "email": "paula.cheng@indochine.com.cn",
+      "department": "dept_biz",
+      "role": "高级跟单经理",
+      "reports_to": null,
+      "type": "internal"
+    },
+    {
+      "id": "u002",
+      "name": "Leo Lin",
+      "email": "leo.lin@indochine.com.cn",
+      "department": "dept_tech",
+      "role": "技术经理",
+      "reports_to": null,
+      "type": "internal"
+    }
+  ],
+  "style_assignments": [
+    {
+      "style_id": "9061160",
+      "primary_owner": "u001",
+      "secondary_owners": [
+        "u002"
+      ],
+      "watchers": []
+    },
+    {
+      "style_id": "9113726",
+      "primary_owner": "u003",
+      "secondary_owners": [
+        "u005"
+      ],
+      "watchers": []
+    }
+  ]
+}

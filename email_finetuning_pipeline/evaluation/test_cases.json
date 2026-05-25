@@ -1,0 +1,529 @@
+{
+  "001_direct": {
+    "scene": "direct_answer",
+    "user_input": "你好",
+    "expected_route": "direct_answer",
+    "description": "问候语应直接回答"
+  },
+  "002_direct": {
+    "scene": "direct_answer",
+    "user_input": "hi",
+    "expected_route": "direct_answer",
+    "description": "问候语应直接回答"
+  },
+  "003_direct": {
+    "scene": "direct_answer",
+    "user_input": "早上好",
+    "expected_route": "direct_answer",
+    "description": "问候语应直接回答"
+  },
+  "004_direct": {
+    "scene": "direct_answer",
+    "user_input": "你能做什么",
+    "expected_route": "direct_answer",
+    "description": "能力询问应直接回答"
+  },
+  "005_direct": {
+    "scene": "direct_answer",
+    "user_input": "今天天气怎么样",
+    "expected_route": "direct_answer",
+    "description": "越界问题应拒绝"
+  },
+  "006_direct": {
+    "scene": "direct_answer",
+    "user_input": "推荐个餐厅",
+    "expected_route": "direct_answer",
+    "description": "越界问题应拒绝"
+  },
+  "007_direct": {
+    "scene": "direct_answer",
+    "user_input": "查一下",
+    "expected_route": "direct_answer",
+    "description": "模糊提问应要求补充信息"
+  },
+  "008_direct": {
+    "scene": "direct_answer",
+    "user_input": "怎么样",
+    "expected_route": "direct_answer",
+    "description": "模糊提问应要求补充信息"
+  },
+  "009_direct": {
+    "scene": "direct_answer",
+    "user_input": "ABCDEFG 的时间线",
+    "expected_route": "direct_answer",
+    "description": "无效款号格式应拒绝"
+  },
+  "010_direct": {
+    "scene": "direct_answer",
+    "user_input": "9999999 的信息",
+    "expected_route": "direct_answer",
+    "description": "不存在款号应拒绝"
+  },
+  "011_direct": {
+    "scene": "direct_answer",
+    "user_input": "CCSS230021 的信息，顺便帮我看看 Paula Cheng 的所有款号",
+    "expected_route": "direct_answer",
+    "description": "多意图应拒绝"
+  },
+  "012_direct": {
+    "scene": "direct_answer",
+    "user_input": "讲个笑话",
+    "expected_route": "direct_answer",
+    "description": "越界问题应拒绝"
+  },
+  "013_direct": {
+    "scene": "direct_answer",
+    "user_input": "帮我写代码",
+    "expected_route": "direct_answer",
+    "description": "越界问题应拒绝"
+  },
+  "014_direct": {
+    "scene": "direct_answer",
+    "user_input": "帮我看看",
+    "expected_route": "direct_answer",
+    "description": "模糊提问应要求补充信息"
+  },
+  "015_direct": {
+    "scene": "direct_answer",
+    "user_input": "查查看",
+    "expected_route": "direct_answer",
+    "description": "模糊提问应要求补充信息"
+  },
+  "016_direct": {
+    "scene": "direct_answer",
+    "user_input": "谢谢",
+    "expected_route": "direct_answer",
+    "description": "感谢语应直接回答"
+  },
+  "017_v1_style_1": {
+    "scene": "route_v1",
+    "user_input": "9141902 的时间线",
+    "expected_route": "route_v1",
+    "expected_style_id": "9141902",
+    "description": "真实款号9141902应走route_v1"
+  },
+  "018_v1_style_2": {
+    "scene": "route_v1",
+    "user_input": "CDIB18485 现在到哪了",
+    "expected_route": "route_v1",
+    "expected_style_id": "CDIB18485",
+    "description": "真实款号CDIB18485应走route_v1"
+  },
+  "019_v1_style_3": {
+    "scene": "route_v1",
+    "user_input": "AW25SBT-266 进度如何",
+    "expected_route": "route_v1",
+    "expected_style_id": "AW25SBT-266",
+    "description": "真实款号AW25SBT-266应走route_v1"
+  },
+  "020_v1_style_4": {
+    "scene": "route_v1",
+    "user_input": "9063777 为什么延期了",
+    "expected_route": "route_v1",
+    "expected_style_id": "9063777",
+    "description": "真实款号9063777应走route_v1",
+    "expected_event": "延期"
+  },
+  "021_v1_style_5": {
+    "scene": "route_v1",
+    "user_input": "CCSS230021B 还能按时出货吗",
+    "expected_route": "route_v1",
+    "expected_style_id": "CCSS230021B",
+    "description": "真实款号CCSS230021B应走route_v1",
+    "expected_event": "出货"
+  },
+  "022_v1_style_6": {
+    "scene": "route_v1",
+    "user_input": "CCSS230030 面料确认了吗",
+    "expected_route": "route_v1",
+    "expected_style_id": "CCSS230030",
+    "description": "真实款号CCSS230030应走route_v1",
+    "expected_event": "面料确认"
+  },
+  "023_v1_style_7": {
+    "scene": "route_v1",
+    "user_input": "2576074 封样了没有",
+    "expected_route": "route_v1",
+    "expected_style_id": "2576074",
+    "description": "真实款号2576074应走route_v1",
+    "expected_event": "封样"
+  },
+  "024_v1_style_8": {
+    "scene": "route_v1",
+    "user_input": "2575370 样衣好了吗",
+    "expected_route": "route_v1",
+    "expected_style_id": "2575370",
+    "description": "真实款号2575370应走route_v1",
+    "expected_event": "样衣"
+  },
+  "025_v1_style_9": {
+    "scene": "route_v1",
+    "user_input": "9063944 Lab Dip 通过了没",
+    "expected_route": "route_v1",
+    "expected_style_id": "9063944",
+    "description": "真实款号9063944应走route_v1",
+    "expected_event": "Lab Dip"
+  },
+  "026_v1_style_10": {
+    "scene": "route_v1",
+    "user_input": "CCAW230053 客户意见给了吗",
+    "expected_route": "route_v1",
+    "expected_style_id": "CCAW230053",
+    "description": "真实款号CCAW230053应走route_v1",
+    "expected_event": "客户意见"
+  },
+  "027_v1_style_11": {
+    "scene": "route_v1",
+    "user_input": "AW25SBT-139 工厂那边有困难吗",
+    "expected_route": "route_v1",
+    "expected_style_id": "AW25SBT-139",
+    "description": "真实款号AW25SBT-139应走route_v1",
+    "expected_event": "工厂问题"
+  },
+  "028_v1_style_12": {
+    "scene": "route_v1",
+    "user_input": "9037590 谁在跟",
+    "expected_route": "route_v1",
+    "expected_style_id": "9037590",
+    "description": "真实款号9037590应走route_v1"
+  },
+  "029_v1_style_13": {
+    "scene": "route_v1",
+    "user_input": "CCAW230078B 是哪个工厂的",
+    "expected_route": "route_v1",
+    "expected_style_id": "CCAW230078B",
+    "description": "真实款号CCAW230078B应走route_v1"
+  },
+  "030_v1_style_14": {
+    "scene": "route_v1",
+    "user_input": "3573194 的所有信息",
+    "expected_route": "route_v1",
+    "expected_style_id": "3573194",
+    "description": "真实款号3573194应走route_v1"
+  },
+  "031_v1_style_15": {
+    "scene": "route_v1",
+    "user_input": "帮我看看 2617158 的整体情况",
+    "expected_route": "route_v1",
+    "expected_style_id": "2617158",
+    "description": "真实款号2617158应走route_v1"
+  },
+  "032_v1_style_16": {
+    "scene": "route_v1",
+    "user_input": "INDOB28955 的拉链信息",
+    "expected_route": "route_v1",
+    "expected_style_id": "INDOB28955",
+    "description": "真实款号INDOB28955应走route_v1",
+    "expected_event": "拉链"
+  },
+  "033_v1_style_17": {
+    "scene": "route_v1",
+    "user_input": "INDOSK28892 面料成分",
+    "expected_route": "route_v1",
+    "expected_style_id": "INDOSK28892",
+    "description": "真实款号INDOSK28892应走route_v1",
+    "expected_event": "面料"
+  },
+  "034_v1_style_18": {
+    "scene": "route_v1",
+    "user_input": "CCAW230035 尺寸规格",
+    "expected_route": "route_v1",
+    "expected_style_id": "CCAW230035",
+    "description": "真实款号CCAW230035应走route_v1",
+    "expected_event": "尺寸"
+  },
+  "035_v1_style_19": {
+    "scene": "route_v1",
+    "user_input": "CCAW230051 出货了吗",
+    "expected_route": "route_v1",
+    "expected_style_id": "CCAW230051",
+    "description": "真实款号CCAW230051应走route_v1",
+    "expected_event": "出货"
+  },
+  "036_v1_style_20": {
+    "scene": "route_v1",
+    "user_input": "CCAW230058 客人确认了吗",
+    "expected_route": "route_v1",
+    "expected_style_id": "CCAW230058",
+    "description": "真实款号CCAW230058应走route_v1",
+    "expected_event": "客户确认"
+  },
+  "037_v1_style_21": {
+    "scene": "route_v1",
+    "user_input": "3537967 是不是要延期",
+    "expected_route": "route_v1",
+    "expected_style_id": "3537967",
+    "description": "真实款号3537967应走route_v1",
+    "expected_event": "延期"
+  },
+  "038_v1_style_22": {
+    "scene": "route_v1",
+    "user_input": "EG385 详细进度",
+    "expected_route": "route_v1",
+    "expected_style_id": "EG385",
+    "description": "真实款号EG385应走route_v1"
+  },
+  "039_v1_style_23": {
+    "scene": "route_v1",
+    "user_input": "AW25SBT-273 现在到什么阶段了",
+    "expected_route": "route_v1",
+    "expected_style_id": "AW25SBT-273",
+    "description": "真实款号AW25SBT-273应走route_v1"
+  },
+  "040_v1_style_24": {
+    "scene": "route_v1",
+    "user_input": "2582907 工厂反映什么问题",
+    "expected_route": "route_v1",
+    "expected_style_id": "2582907",
+    "description": "真实款号2582907应走route_v1",
+    "expected_event": "工厂问题"
+  },
+  "041_v1_style_25": {
+    "scene": "route_v1",
+    "user_input": "AW25-KFCWT149 客人回复了吗",
+    "expected_route": "route_v1",
+    "expected_style_id": "AW25-KFCWT149",
+    "description": "真实款号AW25-KFCWT149应走route_v1",
+    "expected_event": "客户回复"
+  },
+  "042_v1_style_26": {
+    "scene": "route_v1",
+    "user_input": "2023528 延期原因",
+    "expected_route": "route_v1",
+    "expected_style_id": "2023528",
+    "description": "真实款号2023528应走route_v1",
+    "expected_event": "延期"
+  },
+  "043_v1_style_27": {
+    "scene": "route_v1",
+    "user_input": "2641279 的负责人是谁",
+    "expected_route": "route_v1",
+    "expected_style_id": "2641279",
+    "description": "真实款号2641279应走route_v1"
+  },
+  "044_v1_style_28": {
+    "scene": "route_v1",
+    "user_input": "9170280 有哪些人参与",
+    "expected_route": "route_v1",
+    "expected_style_id": "9170280",
+    "description": "真实款号9170280应走route_v1"
+  },
+  "045_v1_style_29": {
+    "scene": "route_v1",
+    "user_input": "2616915 工厂信息",
+    "expected_route": "route_v1",
+    "expected_style_id": "2616915",
+    "description": "真实款号2616915应走route_v1"
+  },
+  "046_v1_style_30": {
+    "scene": "route_v1",
+    "user_input": "帮我整理 CCSS230015 的进度",
+    "expected_route": "route_v1",
+    "expected_style_id": "CCSS230015",
+    "description": "真实款号CCSS230015应走route_v1"
+  },
+  "047_v2_person_1": {
+    "scene": "route_v2",
+    "user_input": "CAD团队 在跟哪些款号",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "048_v2_person_2": {
+    "scene": "route_v2",
+    "user_input": "Benson 最近有什么款号要出货",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "049_v2_factory_3": {
+    "scene": "route_v2",
+    "user_input": "东莞工厂F 最近在做什么款号",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "050_v2_term_4": {
+    "scene": "route_v2",
+    "user_input": "enzyme wash 是什么意思",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "051_v2_person_5": {
+    "scene": "route_v2",
+    "user_input": "Amy Howell 在跟哪些款号",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "052_v2_person_6": {
+    "scene": "route_v2",
+    "user_input": "Anton 最近有什么款号要出货",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "053_v2_factory_7": {
+    "scene": "route_v2",
+    "user_input": "中山工厂I 的产能怎么样",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "054_v2_order_8": {
+    "scene": "route_v2",
+    "user_input": "帮我查一下订单 3544078",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "055_v2_my_styles_9": {
+    "scene": "route_v2",
+    "user_input": "我跟的款号有哪些",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "056_v2_my_styles_10": {
+    "scene": "route_v2",
+    "user_input": "我跟的款号有没有延期",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "057_v2_my_styles_11": {
+    "scene": "route_v2",
+    "user_input": "帮我看看我跟的款号进度",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "058_v2_my_styles_12": {
+    "scene": "route_v2",
+    "user_input": "我跟的款号有没有客户意见没回复的",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "059_v2_factory_13": {
+    "scene": "route_v2",
+    "user_input": "温州工厂G 最近在做什么款号",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "060_v2_term_14": {
+    "scene": "route_v2",
+    "user_input": "satin 是什么意思",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "061_v2_person_15": {
+    "scene": "route_v2",
+    "user_input": "Anton team 跟的款号有没有延期",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "062_v2_factory_16": {
+    "scene": "route_v2",
+    "user_input": "杭州工厂C 在做的款号",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "063_v2_my_styles_17": {
+    "scene": "route_v2",
+    "user_input": "我负责的款号有没有要出货的",
+    "expected_route": "route_v2",
+    "description": "无款号+无分析关键字应走route_v2"
+  },
+  "064_v2v1_person_1": {
+    "scene": "route_v2_then_v1",
+    "user_input": "Alina 跟的款号有没有延期风险",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+风险关键字应走route_v2_then_v1"
+  },
+  "065_v2v1_person_2": {
+    "scene": "route_v2_then_v1",
+    "user_input": "帮我分析一下 CAD团队 负责的款号",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+分析关键字应走route_v2_then_v1"
+  },
+  "066_v2v1_factory_3": {
+    "scene": "route_v2_then_v1",
+    "user_input": "东莞工厂F 在做的款号时间线",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+时间线关键字应走route_v2_then_v1"
+  },
+  "067_v2v1_factory_4": {
+    "scene": "route_v2_then_v1",
+    "user_input": "帮我汇总 绍兴工厂B 的订单情况",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+汇总关键字应走route_v2_then_v1"
+  },
+  "068_v2v1_person_5": {
+    "scene": "route_v2_then_v1",
+    "user_input": "Anton Team 跟的款号有没有延期风险",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+风险关键字应走route_v2_then_v1"
+  },
+  "069_v2v1_person_6": {
+    "scene": "route_v2_then_v1",
+    "user_input": "帮我分析一下 Alice Wang 负责的款号",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+分析关键字应走route_v2_then_v1"
+  },
+  "070_v2v1_factory_7": {
+    "scene": "route_v2_then_v1",
+    "user_input": "杭州工厂C 在做的款号时间线",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+时间线关键字应走route_v2_then_v1"
+  },
+  "071_v2v1_factory_8": {
+    "scene": "route_v2_then_v1",
+    "user_input": "帮我汇总 宁波工厂D 的订单情况",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+汇总关键字应走route_v2_then_v1"
+  },
+  "072_v2v1_my_styles_9": {
+    "scene": "route_v2_then_v1",
+    "user_input": "我跟的款号有没有延期风险",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+风险关键字应走route_v2_then_v1"
+  },
+  "073_v2v1_my_styles_10": {
+    "scene": "route_v2_then_v1",
+    "user_input": "帮我整理一下我跟的款号的时间线",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+时间线关键字应走route_v2_then_v1"
+  },
+  "074_v2v1_my_styles_11": {
+    "scene": "route_v2_then_v1",
+    "user_input": "我跟的款号整体情况怎么样",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+整体情况关键字应走route_v2_then_v1"
+  },
+  "075_v2v1_person_12": {
+    "scene": "route_v2_then_v1",
+    "user_input": "Alice Ning 跟的款号延期根因是什么",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+根因关键字应走route_v2_then_v1"
+  },
+  "076_v2v1_factory_13": {
+    "scene": "route_v2_then_v1",
+    "user_input": "帮我分析 苏州工厂H 的订单风险",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+分析关键字应走route_v2_then_v1"
+  },
+  "077_v2v1_my_styles_14": {
+    "scene": "route_v2_then_v1",
+    "user_input": "汇总一下我负责的所有款号",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+汇总关键字应走route_v2_then_v1"
+  },
+  "078_v2v1_person_15": {
+    "scene": "route_v2_then_v1",
+    "user_input": "Amy/Emily 负责的款号时间线",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+时间线关键字应走route_v2_then_v1"
+  },
+  "079_v2v1_factory_16": {
+    "scene": "route_v2_then_v1",
+    "user_input": "佛山工厂J 的款号延期根因",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+根因关键字应走route_v2_then_v1"
+  },
+  "080_v2v1_my_styles_17": {
+    "scene": "route_v2_then_v1",
+    "user_input": "帮我分析我跟的款号风险",
+    "expected_route": "route_v2_then_v1",
+    "description": "无款号+分析关键字应走route_v2_then_v1"
+  }
+}

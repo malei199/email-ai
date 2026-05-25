@@ -1,0 +1,269 @@
+[
+  {
+    "name": "my_styles_msg3",
+    "query_type": "kg_query.my_styles",
+    "data": {
+      "styles": [
+        {
+          "style_id": "AW25-KFWTS101",
+          "latest_category": "",
+          "event_count": 5
+        },
+        {
+          "style_id": "AW25-KFWTT156",
+          "latest_category": "",
+          "event_count": 0
+        },
+        {
+          "style_id": "INDOT23404",
+          "latest_category": "",
+          "event_count": 1
+        },
+        {
+          "style_id": "SS25IACB201",
+          "latest_category": "",
+          "event_count": 1
+        },
+        {
+          "style_id": "INDOB28113",
+          "latest_category": "",
+          "event_count": 4
+        },
+        {
+          "style_id": "INDOT28119",
+          "latest_category": "",
+          "event_count": 4
+        },
+        {
+          "style_id": "INDOT26215",
+          "latest_category": "",
+          "event_count": 1
+        },
+        {
+          "style_id": "INDOT26908",
+          "latest_category": "",
+          "event_count": 1
+        },
+        {
+          "style_id": "INDOB27696",
+          "latest_category": "",
+          "event_count": 1
+        },
+        {
+          "style_id": "INDOT25139",
+          "latest_category": "",
+          "event_count": 6
+        },
+        {
+          "style_id": "INDOT22861",
+          "latest_category": "",
+          "event_count": 1
+        },
+        {
+          "style_id": "9046143",
+          "latest_category": "",
+          "event_count": 2
+        },
+        {
+          "style_id": "9024097",
+          "latest_category": "",
+          "event_count": 6
+        },
+        {
+          "style_id": "9037551",
+          "latest_category": "",
+          "event_count": 1
+        },
+        {
+          "style_id": "8826445",
+          "latest_category": "",
+          "event_count": 8
+        },
+        {
+          "style_id": "9113832",
+          "latest_category": "",
+          "event_count": 6
+        },
+        {
+          "style_id": "9113726",
+          "latest_category": "",
+          "event_count": 9
+        },
+        {
+          "style_id": "9170269",
+          "latest_category": "",
+          "event_count": 3
+        },
+        {
+          "style_id": "9163621",
+          "latest_category": "",
+          "event_count": 1
+        },
+        {
+          "style_id": "9061160",
+          "latest_category": "",
+          "event_count": 33
+        }
+      ],
+      "total": 253
+    }
+  },
+  {
+    "name": "style_summaries_msg5",
+    "query_type": "kg_query.style_summaries",
+    "data": {
+      "summaries": [
+        {
+          "style_id": "AW25-KFWTS101",
+          "latest_category": "定辅料",
+          "total_events": 24,
+          "total_delay_days": 0,
+          "last_update": "2025-07-19"
+        },
+        {
+          "style_id": "AW25-KFWTT156",
+          "latest_category": "大货订单",
+          "total_events": 16,
+          "total_delay_days": 0,
+          "last_update": "2025-07-19"
+        },
+        {
+          "style_id": "INDOT23404",
+          "latest_category": "修改样",
+          "total_events": 6,
+          "total_delay_days": 0,
+          "last_update": "2025-07-18"
+        },
+        {
+          "style_id": "SS25IACB201",
+          "latest_category": "试身样",
+          "total_events": 7,
+          "total_delay_days": 0,
+          "last_update": "2025-07-18"
+        },
+        {
+          "style_id": "INDOB28113",
+          "latest_category": "定面料",
+          "total_events": 4,
+          "total_delay_days": 0,
+          "last_update": "2025-07-18"
+        },
+        {
+          "style_id": "INDOT28119",
+          "latest_category": "定面料",
+          "total_events": 7,
+          "total_delay_days": 0,
+          "last_update": "2025-07-18"
+        },
+        {
+          "style_id": "INDOT26215",
+          "latest_category": "定面料",
+          "total_events": 2,
+          "total_delay_days": 0,
+          "last_update": "2025-07-16"
+        },
+        {
+          "style_id": "INDOT26908",
+          "latest_category": "调纸样",
+          "total_events": 7,
+          "total_delay_days": 0,
+          "last_update": "2025-07-11"
+        },
+        {
+          "style_id": "INDOB27696",
+          "latest_category": "调纸样",
+          "total_events": 2,
+          "total_delay_days": 0,
+          "last_update": "2025-07-11"
+        },
+        {
+          "style_id": "INDOT25139",
+          "latest_category": "面辅料价格",
+          "total_events": 14,
+          "total_delay_days": 0,
+          "last_update": "2025-07-07"
+        }
+      ],
+      "total": 20
+    }
+  },
+  {
+    "name": "style_summaries_msg7",
+    "query_type": "kg_query.style_summaries",
+    "data": {
+      "summaries": [
+        {
+          "style_id": "9061160",
+          "latest_category": "一般沟通",
+          "total_events": 111,
+          "total_delay_days": 0,
+          "last_update": "2024-12-17"
+        },
+        {
+          "style_id": "8826445",
+          "latest_category": "面料",
+          "total_events": 88,
+          "total_delay_days": 0,
+          "last_update": "2025-05-13"
+        },
+        {
+          "style_id": "9113832",
+          "latest_category": "其他",
+          "total_events": 31,
+          "total_delay_days": 0,
+          "last_update": "2025-02-13"
+        },
+        {
+          "style_id": "9113726",
+          "latest_category": "其他",
+          "total_events": 58,
+          "total_delay_days": 0,
+          "last_update": "2025-02-13"
+        },
+        {
+          "style_id": "9170269",
+          "latest_category": "出货",
+          "total_events": 27,
+          "total_delay_days": 0,
+          "last_update": "2025-01-26"
+        },
+        {
+          "style_id": "9163621",
+          "latest_category": "出货",
+          "total_events": 50,
+          "total_delay_days": 0,
+          "last_update": "2025-01-26"
+        },
+        {
+          "style_id": "9024097",
+          "latest_category": "产前样",
+          "total_events": 48,
+          "total_delay_days": 0,
+          "last_update": "2025-05-25"
+        },
+        {
+          "style_id": "9037551",
+          "latest_category": "产前样",
+          "total_events": 9,
+          "total_delay_days": 0,
+          "last_update": "2025-05-25"
+        },
+        {
+          "style_id": "9046143",
+          "latest_category": "产前样",
+          "total_events": 23,
+          "total_delay_days": 0,
+          "last_update": "2025-05-25"
+        },
+        {
+          "style_id": "INDOT22861",
+          "latest_category": "面辅料价格",
+          "total_events": 10,
+          "total_delay_days": 0,
+          "last_update": "2025-06-28"
+        }
+      ],
+      "total": 20
+    }
+  }
+]

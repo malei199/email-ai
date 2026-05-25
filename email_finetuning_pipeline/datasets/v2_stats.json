@@ -1,0 +1,55 @@
+{
+  "generated_at": "2026-05-07T17:36:09.878203",
+  "seed": 42,
+  "train": {
+    "sft_count": 786,
+    "dpo_count": 776,
+    "round_distribution": {
+      "2": 329,
+      "3": 162,
+      "1": 96,
+      "4": 94,
+      "7": 9,
+      "10": 21,
+      "5": 44,
+      "6": 21,
+      "9": 4,
+      "8": 6
+    },
+    "chain_count": 176,
+    "result_count": 1742
+  },
+  "val": {
+    "sft_count": 98,
+    "dpo_count": 96,
+    "round_distribution": {
+      "2": 42,
+      "4": 8,
+      "3": 26,
+      "1": 13,
+      "7": 2,
+      "5": 3,
+      "6": 2,
+      "9": 1,
+      "10": 1
+    },
+    "chain_count": 20,
+    "result_count": 195
+  },
+  "test": {
+    "sft_count": 95,
+    "dpo_count": 93,
+    "round_distribution": {
+      "1": 17,
+      "2": 43,
+      "4": 13,
+      "3": 14,
+      "6": 3,
+      "5": 2,
+      "8": 1,
+      "10": 2
+    },
+    "chain_count": 39,
+    "result_count": 188
+  }
+}

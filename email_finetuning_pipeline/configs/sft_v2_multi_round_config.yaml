@@ -1,0 +1,55 @@
+### V2 多轮 SFT 训练配置
+### 让 V2 学会基于 tool 结果做补充查询
+
+# 模型配置
+model_name_or_path: Qwen/Qwen2.5-7B-Instruct
+template: qwen
+
+# 阶段配置
+stage: sft
+do_train: true
+
+# 数据配置
+dataset: sft_multi_round_v2_train
+eval_dataset: sft_multi_round_v2_val
+cutoff_len: 8192
+max_samples: null
+overwrite_cache: true
+preprocessing_num_workers: 16
+
+# 输出配置
+output_dir: ./outputs/sft-v2
+logging_steps: 10
+plot_loss: true
+overwrite_output_dir: true
+
+
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 4
+#gradient_checkpointing: true
+learning_rate: 2.0e-5
+num_train_epochs: 2.5
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+ddp_timeout: 180000000
+
+finetuning_type: lora
+lora_target: all
+lora_rank: 16
+lora_alpha: 32
+lora_dropout: 0.05
+use_rslora: false
+
+optim: adamw_torch
+weight_decay: 0.01
+max_grad_norm: 1.0
+
+per_device_eval_batch_size: 2
+eval_strategy: steps
+eval_steps: 25
+save_steps: 25
+save_strategy: steps
+load_best_model_at_end: true
+
+report_to: tensorboard
